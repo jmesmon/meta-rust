@@ -28,8 +28,9 @@ jobs:
       - name: Checkout meta-openembedded
         run: |
           git clone --depth 1 git://git.openembedded.org/meta-openembedded.git meta-openembedded
+      - name: install buildtools
+        run: ./scripts/install-buildtools
       - name: build
-        run: ./scripts/build2
+        run: ./meta-rust/scripts/build2
         env:
           MACHINE: ${{ matrix.machine }}
-
