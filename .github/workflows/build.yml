@@ -19,19 +19,15 @@ jobs:
 
     steps:
       - name: Checkout poky
-        uses: actions/checkout@v2
-        with:
-          repository: git://git.yoctoproject.org/poky.git
-          path: .
+        run: |
+          git clone --depth 1 git://git.yoctoproject.org/poky.git .
       - name: Checkout meta-rust
         uses: actions/checkout@v2
         with:
           path: meta-rust
       - name: Checkout meta-openembedded
-        uses: actions/checkout@v2
-        with:
-          repository: git://git.openembedded.org/meta-openembedded.git
-          path: meta-openembedded
+        run: |
+          git clone --depth 1 git://git.openembedded.org/meta-openembedded.git meta-openembedded
       - name: build
         run: ./scripts/build2
         env:
