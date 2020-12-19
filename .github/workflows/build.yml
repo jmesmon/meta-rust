@@ -1,0 +1,39 @@
+on:
+  push:
+    branches-ignore:
+      - '**.tmp'
+
+name: build
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        machine:
+          - qemux86
+          - qemux86-64
+          - qemuarm
+          - qemuarm64
+          - qemumips
+
+    steps:
+      - name: Checkout poky
+        uses: actions/checkout@v2
+        with:
+          repository: git://git.yoctoproject.org/poky.git
+          path: .
+      - name: Checkout meta-rust
+        uses: actions/checkout@v2
+        with:
+          path: meta-rust
+      - name: Checkout meta-openembedded
+        uses: actions/checkout@v2
+        with:
+          repository: git://git.openembedded.org/meta-openembedded.git
+          path: meta-openembedded
+      - name: build
+        run: ./scripts/build2
+        env:
+          MACHINE: ${{ matrix.machine }}
+

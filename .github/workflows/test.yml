@@ -1,0 +1,25 @@
+on:
+  push:
+    branches-ignore:
+      - '**.tmp'
+
+name: test
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        machine:
+          - qemux86
+          - qemux86-64
+          - qemuarm
+          - qemuarm64
+          - qemumips
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: ./scripts/fetch.sh master
+      - run: MACHINE=${{ matrix.machine }} ./scripts/build.sh
+
