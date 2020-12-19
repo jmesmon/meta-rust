@@ -31,7 +31,7 @@ jobs:
       - name: install buildtools
         run: ./scripts/install-buildtools
       - name: install other build tools
-        run: apt install diffstat
+        run: sudo apt install diffstat
       - name: build
         run: ./meta-rust/scripts/build2
         env:
