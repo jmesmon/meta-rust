@@ -17,6 +17,6 @@ rm -f build/conf/bblayers.conf || die "failed to nuke bblayers.conf"
 rm -f build/conf/local.conf || die "failed to nuke local.conf"
 
 export TEMPLATECONF=meta-rust/conf
-. poky/oe-init-build-env
+. oe-init-build-env
 
 bitbake "$BUILD_TARGETS"
