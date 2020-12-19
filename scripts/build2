@@ -19,4 +19,4 @@ rm -f build/conf/local.conf || die "failed to nuke local.conf"
 export TEMPLATECONF=meta-rust/conf
 . oe-init-build-env
 
-bitbake "$BUILD_TARGETS"
+bitbake $BUILD_TARGETS
